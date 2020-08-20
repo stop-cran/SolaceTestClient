@@ -10,7 +10,7 @@
     <Copyright>Apache 2.0 (stop-cran, 2019-2020)</Copyright>
     <LangVersion>latest</LangVersion>
     <RepositoryUrl>https://github.com/stop-cran/SolaceTestClient.git</RepositoryUrl>
-    <Version>1.1.0</Version>
+    <Version>1.2.0</Version>
     <PackageLicenseFile>license.txt</PackageLicenseFile>
     <RepositoryType>git</RepositoryType>
     <PackageTags>solace</PackageTags>

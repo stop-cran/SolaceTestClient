@@ -36,7 +36,7 @@ namespace SolaceTestClient
                     ReconnectRetries = 10,
                     SSLTrustStore = trustStore.Certificates
                 },
-                (s, e) => Console.WriteLine($"Received a message: ApplicationMessageType={e.Message.ApplicationMessageType}, CorrelationId={e.Message.CorrelationId}, payload: {e.Message.BinaryAttachment.Length} bytes."),
+                (s, e) => Console.WriteLine($"Received a message: ApplicationMessageType={e.Message.ApplicationMessageType}, CorrelationId={e.Message.CorrelationId}, binary attachment (in base64): {Convert.ToBase64String(e.Message.BinaryAttachment)}."),
                 (s, e) => Console.WriteLine(e.ToString())))
                 {
                     Console.WriteLine("Connection result code: " + session.Connect());
