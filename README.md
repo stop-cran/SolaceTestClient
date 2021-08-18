@@ -7,7 +7,7 @@ The package provides a tool to test connection to [Solace Pub-Sub](https://solac
 NuGet package is available [here](https://www.nuget.org/packages/SolaceTestClient).
 
 ```
-dotnet tool install --global SolaceTestClient --version 1.2.0
+dotnet tool install --global SolaceTestClient --version 1.3.0
 ```
 
 # Example
