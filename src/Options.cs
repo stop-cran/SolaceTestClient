@@ -20,6 +20,10 @@ namespace SolaceTestClient
         [Option('t', "topic", HelpText = "A topic to subscribe.")]
         public string Topic { get; set; }
 
+
+        [Option("skip-ssl-check", HelpText = "Skip SSL check.", Default = false)]
+        public bool SkipSslCheck { get; set; }
+
         [Option("verbosity", HelpText = "Logging verbosity.", Default = SolLogLevel.Info)]
         public SolLogLevel Verbosity { get; set; }
     }

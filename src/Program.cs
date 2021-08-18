@@ -20,24 +20,33 @@ namespace SolaceTestClient
                 LogDelegate = logInfo => Console.WriteLine(logInfo.ToString())
             });
 
-            using (var trustStore = new X509Store(StoreName.CertificateAuthority, StoreLocation.LocalMachine))
             using (var context = ContextFactory.Instance.CreateContext(
                 new ContextProperties(),
                 (sender, e) => Console.WriteLine(e.ToString())))
             {
-                trustStore.Open(OpenFlags.ReadOnly);
-
-                using (var session = context.CreateSession(new SessionProperties
+                var sessionProperties = new SessionProperties
                 {
                     Host = arguments.Host,
                     VPNName = arguments.VPN,
                     UserName = arguments.userName,
                     Password = arguments.Password,
                     ReconnectRetries = 10,
-                    SSLTrustStore = trustStore.Certificates
-                },
-                (s, e) => Console.WriteLine($"Received a message: ApplicationMessageType={e.Message.ApplicationMessageType}, CorrelationId={e.Message.CorrelationId}, binary attachment (in base64): {Convert.ToBase64String(e.Message.BinaryAttachment)}."),
-                (s, e) => Console.WriteLine(e.ToString())))
+                };
+                if (arguments.SkipSslCheck)
+                {
+                    sessionProperties.SSLValidateCertificate = false;
+                }
+                else if (arguments.Host.StartsWith("tcps://") || arguments.Host.StartsWith("https://"))
+                {
+                    var trustStore = new X509Store(StoreName.CertificateAuthority, StoreLocation.LocalMachine);
+                    trustStore.Open(OpenFlags.ReadOnly);
+                    sessionProperties.SSLTrustStore = trustStore.Certificates;
+                }
+
+                using (var session = context.CreateSession(sessionProperties,
+                    (s, e) => Console.WriteLine(
+                        $"Received a message: ApplicationMessageType={e.Message.ApplicationMessageType}, CorrelationId={e.Message.CorrelationId}, binary attachment (in base64): {Convert.ToBase64String(e.Message.BinaryAttachment)}."),
+                    (s, e) => Console.WriteLine(e.ToString())))
                 {
                     Console.WriteLine("Connection result code: " + session.Connect());
 

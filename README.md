@@ -1,4 +1,4 @@
-# Overview [![NuGet](https://img.shields.io/nuget/v/SolaceTestClient.svg)](https://www.nuget.org/packages/SolaceTestClient) [![Actions Status](https://github.com/stop-cran/SolaceTestClient/workflows/.NET%20Core/badge.svg)](https://github.com/stop-cran/SolaceTestClient/actions)
+# Overview [![NuGet](https://img.shields.io/nuget/v/SolaceTestClient.svg)](https://www.nuget.org/packages/SolaceTestClient) [![Actions Status](../../workflows/.NET%20Core/badge.svg)](../../actions)
 
 The package provides a tool to test connection to [Solace Pub-Sub](https://solace.com/).
 
